@@ -11,26 +11,36 @@ The following set of rules are intended to give the game some sort of consistenc
 5. The game is first-person.
 6. The game's visuals should be in a low poly style, close to the work of Quaternius.
 7. All additions to the game should be modular; They should not need change in any other part of the game to work in a technical sense, nor should they make it difficult to build the game further.
-8. The project's organization should:
-	1. Make it easy to find what you want.
-	2. Keep different roles separate; different types of files should not be mixed. (ex. The player model should be under "models", while the player script should be under "scripts".)
-9. Every contributor get's one folder; they're free to organize this folders to their liking.
+8. The project should follow the "Best practices" stated in the Godot Docs: [Link.](https://docs.godotengine.org/en/stable/tutorials/best_practices/index.html)
+9. Every contributor get's one folder to them self; they're free to organize this folder to their liking.
 10. You're not allowed to edit another contributor's folder.
-11. In accordance with rule 7 and 8, use this as a guide:
-	* addons
-	* contributors:
-		* contributor 1's name (ex: lopano)
-		* contributor 2's name (ex: alex)
-		* contributor 3's name (ex: steve)
-	* common:
-		* 3D asset scenes (player.tscn, npc.tscn)
-		* custom resources (player_stats.res)
-		* game scenes (title_screen.tscn, main.tscn)
-		* scripts (player.gd)
-		* textures (dirt.png)
-	* UI asset scene (menu_button.tscn)
-	* default_bus_layout.tres
-	* environment.tres
-	* icon.svg
- 11. Every contributor is allowed to have a maximum of 200Mb of data in their own folder.
- 12. The project should not exceed 5Gb in size.
+11. Everything that's just by mutiple people is put under "res://common/".
+12. Every contributor is allowed to have a maximum of 200Mb of data in their own folder.
+13. The project should not exceed 5Gb in size.
+
+### Example of structure
+* addons/
+* contributors/
+	* contributor 1's name/ (ex: lopano/)
+	* contributor 2's name/ (ex: alex/)
+	* contributor 3's name/ (ex: steve/)
+* common/
+	* docs/learning.html
+	* models/town/house/
+		* house.dae
+		* window.png
+		* door.png
+	* characters/
+		* player/
+			* cubio.dae
+			* cubio.png
+		* enemies/goblin/
+			* goblin.dae
+			* goblin.png
+		* npcs/suzanne/
+			* suzanne.dae
+			suzanne.png
+	* levels/riverdale/riverdale.scn
+* default_bus_layout.tres
+* environment.tres
+* icon.svg
