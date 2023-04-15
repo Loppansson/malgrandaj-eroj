@@ -10,7 +10,7 @@ The following set of rules are intended to give the game some sort of consistenc
 4. Always act to promote an environment that promotes subjective well-being; Be respectful, listen to one another, and have fun!
 5. The game is constructed in Godot 4.0.
 6. The game is first-person.
-7. The game's visuals should be in a low poly style, close to the work of Quaternius.
+7. The game's visuals should be in a low poly style, close to the work of Quaternius. (Using their work is recomended.)
 8. All additions to the game should be modular; They should not need change in any other part of the game to work in a technical sense, nor should they make it difficult to build the game further.
 9. The project should follow the "Best practices" stated in the Godot Docs: [Link.](https://docs.godotengine.org/en/stable/tutorials/best_practices/index.html)
 10. Every contributor get's one folder to them self; they're free to organize this folder to their liking.
