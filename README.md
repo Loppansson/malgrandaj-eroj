@@ -5,7 +5,7 @@ Malgrandaj Eroj (en: "Small Parts") is a procedurally generated first-person ope
 
 The following set of rules are intended to give the game some sort of consistency, and make collaboration easier.
 1. These rules are established with the following intent: To make developing the game promote as much subjective well-being as posible.
-2. Subjective well-being is difined as low negative effect, high positive effect, and high over-all life satisfaction.
+2. Subjective well-being is difined as low negative affect, high positive affect, and high over-all life satisfaction.
 3. These rules, with the exeption of 1, 2, and 3, may change, if by doing so, they will better achomplish the goal laid out by rule 1.
 4. Always act to promote an environment that promotes subjective well-being; Be respectful, listen to one another, and have fun!
 5. The game is first-person.
