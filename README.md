@@ -9,11 +9,11 @@ The following set of rules are intended to give the game some sort of consistenc
  3. Always act to promote an environment that promotes subjective well-being; Be respectful, listen to one another, and have fun!
  4. The game is first-person.
  5. The game's visuals should be in a low poly style, close to the work of Quaternius.
- 6. All additions to the game should be modular; They should not need change in any other part of the game to work in a technical sense.
+ 6. All additions to the game should be modular; They should not need change in any other part of the game to work in a technical sense, nor should they make it difficult to build the game further.
  7. The project's organization should:
 	1. Make it easy to find what you want.
 	2. Keep different roles separate; different types of files should not be mixed. (ex. The player model should be under "models", while the player script should be under "scripts".)
- 8. Every contributor is allowed to freely organize their own folders to their liking.
+ 8. Every contributor get's one folder; they're free to organize this folders to their liking.
  9. In accordance with rule 7 and 8, use this as a guide:
  	* addons
  	* contributor 1's name (ex: lopano)
