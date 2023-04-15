@@ -1,5 +1,5 @@
 # Malgrandaj Eroj
-A procedurally generated first-person open-world survival game in a low-poly style, featuring the GPLv3 License!
+Malgrandaj Eroj (en: "Small Parts") is a procedurally generated first-person open-world survival game in a low-poly style, featuring the GPLv3 License!
 
 ## Rules.
 
