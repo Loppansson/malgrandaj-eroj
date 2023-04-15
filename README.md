@@ -27,10 +27,6 @@ The following set of rules are intended to give the game some sort of consistenc
 
 ### Example of structure
 * addons/
-* contributors/
-	* contributor 1's name/ (ex: lopano/)
-	* contributor 2's name/ (ex: alex/)
-	* contributor 3's name/ (ex: steve/)
 * common/
 	* docs/learning.html
 	* models/town/house/
@@ -48,6 +44,10 @@ The following set of rules are intended to give the game some sort of consistenc
 			* suzanne.dae
 			suzanne.png
 	* levels/riverdale/riverdale.scn
+* contributors/
+	* contributor 1's name/ (ex: lopano/)
+	* contributor 2's name/ (ex: alex/)
+	* contributor 3's name/ (ex: steve/)
 * default_bus_layout.tres
 * environment.tres
 * icon.svg
