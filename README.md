@@ -16,7 +16,7 @@ The following set of rules are intended to give the game some sort of consistenc
 10. You're not allowed to edit another contributor's folder.
 11. Every contributor is allowed to have a maximum of 200Mb of data in their own folder.
 12. Everything that's just by mutiple people is put under "res://common/".
-13. All code in "res://common/" should follow the "GDScript style guide" and be documented in acordence with the "Writing guidelines" stated in the Godot Docs: [GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html), ["Writing guidelines"](https://docs.godotengine.org/en/stable/contributing/documentation/docs_writing_guidelines.html).
+13. All code in "res://common/" should follow the "GDScript style guide" and be documented in acordence with the "Writing guidelines" stated in the Godot Docs: [GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html), [Writing guidelines](https://docs.godotengine.org/en/stable/contributing/documentation/docs_writing_guidelines.html).
 14. The project should not exceed 5Gb in size.
 
 ### Example of structure
