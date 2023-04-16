@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr2gxsga8kwei"]
+
+[ext_resource type="Script" path="res://common/main/main.gd" id="1_kelr6"]
+[ext_resource type="PackedScene" uid="uid://bxtrut3adrouf" path="res://addons/fullscreen on input/fullscreen_on_input.tscn" id="2_gsa8r"]
+[ext_resource type="PackedScene" path="res://addons/quit on input/quit_on_input.tscn" id="3_k07nq"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_kelr6")
+
+[node name="FullscreenOnInput" parent="." instance=ExtResource("2_gsa8r")]
+
+[node name="QuitOnInput" parent="." instance=ExtResource("3_k07nq")]

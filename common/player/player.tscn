@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://71emmhb7enbq"]
+
+[ext_resource type="PackedScene" path="res://addons/character-controller/fps/fps_controller_3d.tscn" id="1_iapyo"]
+[ext_resource type="Script" path="res://addons/character-controller/example/main/player.gd" id="2_gn7p1"]
+[ext_resource type="Environment" uid="uid://b3cn01u84faiy" path="res://addons/character-controller/example/main/underwater.tres" id="3_7xrc3"]
+
+[node name="Player" instance=ExtResource("1_iapyo")]
+script = ExtResource("2_gn7p1")
+input_back_action_name = "move_backward"
+input_forward_action_name = "move_forward"
+input_left_action_name = "move_left"
+input_right_action_name = "move_right"
+input_sprint_action_name = "move_sprint"
+input_jump_action_name = "move_jump"
+input_crouch_action_name = "move_crouch"
+input_fly_mode_action_name = "move_fly_mode"
+underwater_env = ExtResource("3_7xrc3")
+rotation_to_move = false

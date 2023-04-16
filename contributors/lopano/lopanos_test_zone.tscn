@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://cx7smg3oeoin7"]
+
+[ext_resource type="Script" path="res://addons/quit on input/quit_on_input.gd" id="1_gq3kv"]
+[ext_resource type="Environment" uid="uid://tntsy6pah246" path="res://contributors/lopano/atmosphere/lopanos_environment.tres" id="1_o7a6q"]
+[ext_resource type="PackedScene" path="res://contributors/lopano/terrain/ground/ground.tscn" id="1_y5p4d"]
+[ext_resource type="PackedScene" uid="uid://2oxdgu03lnbk" path="res://contributors/lopano/player/lopanos_player.tscn" id="2_77rp2"]
+[ext_resource type="PackedScene" uid="uid://t7f7lc8h1od6" path="res://addons/quaternius simple nature pack/static bodies/tree_3.tscn" id="4_mruke"]
+[ext_resource type="PackedScene" uid="uid://cal6m7uf1k1n7" path="res://addons/quaternius simple nature pack/static bodies/rock_1.tscn" id="6_0fiti"]
+[ext_resource type="PackedScene" uid="uid://djb0yl6e0llhd" path="res://addons/quaternius simple nature pack/static bodies/rock_2.tscn" id="7_clypj"]
+[ext_resource type="PackedScene" uid="uid://kopcbpjf5sbn" path="res://addons/quaternius simple nature pack/static bodies/rock_3.tscn" id="8_gtfor"]
+[ext_resource type="PackedScene" uid="uid://cygv0m43n3g65" path="res://addons/quaternius simple nature pack/static bodies/bush_1.tscn" id="9_nr7rm"]
+[ext_resource type="ArrayMesh" uid="uid://bqy3ghq6341kr" path="res://addons/quaternius simple nature pack/meshes/grass_3.res" id="9_plvhj"]
+[ext_resource type="PackedScene" path="res://addons/quaternius simple nature pack/static bodies/bush_2.tscn" id="10_tj1uw"]
+
+[node name="LopanosTestZone" type="Node3D"]
+
+[node name="QuitOnInput" type="Node" parent="."]
+script = ExtResource("1_gq3kv")
+
+[node name="Atmosphere" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Atmosphere"]
+environment = ExtResource("1_o7a6q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Atmosphere"]
+transform = Transform3D(1, 0, 0, 0, 0.671682, 0.74084, 0, -0.74084, 0.671682, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="NatureObjects" type="Node3D" parent="Environment"]
+
+[node name="Tree3" parent="Environment/NatureObjects" instance=ExtResource("4_mruke")]
+transform = Transform3D(0.280684, 0, -0.9598, 0, 1, 0, 0.9598, 0, 0.280684, -3.39843, -9.53674e-07, -2.84371)
+
+[node name="Rock1" parent="Environment/NatureObjects" instance=ExtResource("6_0fiti")]
+transform = Transform3D(-0.821179, 0, 0.57067, 0, 1, 0, -0.57067, 0, -0.821179, -4.8823, -0.221703, -2.11521)
+
+[node name="Rock2" parent="Environment/NatureObjects" instance=ExtResource("7_clypj")]
+transform = Transform3D(-0.821179, 0, 0.57067, 0, 1, 0, -0.57067, 0, -0.821179, -4.16284, -0.215602, -1.41999)
+
+[node name="Rock3" parent="Environment/NatureObjects" instance=ExtResource("8_gtfor")]
+transform = Transform3D(0.931975, 0.339624, 0.126799, -0.357578, 0.803628, 0.47573, 0.0596698, -0.48871, 0.870404, -5.09352, -0.821286, -0.803671)
+
+[node name="Bush1" parent="Environment/NatureObjects" instance=ExtResource("9_nr7rm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.98809, 0, -0.621186)
+
+[node name="Bush2" parent="Environment/NatureObjects" instance=ExtResource("10_tj1uw")]
+transform = Transform3D(-0.462213, 0, -0.886769, 0, 1, 0, 0.886769, 0, -0.462213, -2.73266, 0, -1.51295)
+
+[node name="Grass3" type="MeshInstance3D" parent="Environment/NatureObjects"]
+transform = Transform3D(1.959, 0, 0, 0, 1.959, 0, 0, 0, 1.959, -5.72339, 2.38419e-07, 0.417363)
+mesh = ExtResource("9_plvhj")
+skeleton = NodePath("../../..")
+
+[node name="Grass4" type="MeshInstance3D" parent="Environment/NatureObjects"]
+transform = Transform3D(1.774, 0, 0, 0, 1.774, 0, 0, 0, 1.774, -2.46903, 3.57628e-07, -2.73151)
+mesh = ExtResource("9_plvhj")
+skeleton = NodePath("../../..")
+
+[node name="Grass5" type="MeshInstance3D" parent="Environment/NatureObjects"]
+transform = Transform3D(1.935, 0, 0, 0, 1.935, 0, 0, 0, 1.935, -4.14175, 3.57628e-07, -3.90896)
+mesh = ExtResource("9_plvhj")
+skeleton = NodePath("../../..")
+
+[node name="Ground" parent="Environment" instance=ExtResource("1_y5p4d")]
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("2_77rp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0493126, 1.5, 0.504104)
