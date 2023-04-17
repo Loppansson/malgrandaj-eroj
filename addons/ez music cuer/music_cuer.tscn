@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bidyn0ewbbt4h"]
+
+[ext_resource type="Script" path="res://addons/ez music cuer/music_cuer.gd" id="1_rmpdg"]
+
+[node name="MusicCuer" type="Node"]
+script = ExtResource("1_rmpdg")

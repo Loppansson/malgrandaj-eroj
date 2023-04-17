@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://71emmhb7enbq" path="res://common/player/player.tscn" id="1_05pjd"]
 [ext_resource type="Environment" uid="uid://balpc0jgt0tas" path="res://common/world/environment.tres" id="1_f2jlc"]
-[ext_resource type="PackedScene" path="res://common/world/ground/ground.tscn" id="2_hs8xv"]
+[ext_resource type="PackedScene" uid="uid://dea6lia8qhm0p" path="res://common/world/terrain generation/generator.tscn" id="2_nyuxp"]
 [ext_resource type="PackedScene" uid="uid://cygv0m43n3g65" path="res://addons/quaternius simple nature pack/static bodies/bush_1.tscn" id="4_rkpk8"]
 [ext_resource type="PackedScene" uid="uid://djb0yl6e0llhd" path="res://addons/quaternius simple nature pack/static bodies/rock_2.tscn" id="5_e1218"]
 [ext_resource type="PackedScene" uid="uid://kopcbpjf5sbn" path="res://addons/quaternius simple nature pack/static bodies/rock_3.tscn" id="6_sj00m"]
@@ -18,7 +18,8 @@ environment = ExtResource("1_f2jlc")
 transform = Transform3D(0.876508, -0.340332, 0.340451, 0, 0.70723, 0.706983, -0.481387, -0.619677, 0.619893, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Ground" parent="." instance=ExtResource("2_hs8xv")]
+[node name="Generato" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("2_nyuxp")]
+origin = NodePath("../Player")
 
 [node name="Objects" type="Node3D" parent="."]
 

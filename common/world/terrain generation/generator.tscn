@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dea6lia8qhm0p"]
+
+[ext_resource type="Script" path="res://common/world/terrain generation/generator.gd" id="1_ynvmt"]
+[ext_resource type="PackedScene" uid="uid://b1a53ajgs8jcs" path="res://common/world/terrain generation/chunk/chunk_mesh.tscn" id="2_c83f8"]
+
+[node name="Generato" type="Node3D"]
+script = ExtResource("1_ynvmt")
+chunk_mesh = ExtResource("2_c83f8")

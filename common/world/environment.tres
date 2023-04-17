@@ -14,3 +14,7 @@ sky = SubResource("Sky_mq82q")
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.690196, 0.882353, 0.976471, 1)
+fog_density = 0.002
+fog_sky_affect = 0.0

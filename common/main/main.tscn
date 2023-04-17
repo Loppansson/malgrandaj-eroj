@@ -1,11 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr2gxsga8kwei"]
+[gd_scene load_steps=6 format=3 uid="uid://cr2gxsga8kwei"]
 
 [ext_resource type="Script" path="res://common/main/main.gd" id="1_kelr6"]
+[ext_resource type="PackedScene" uid="uid://b65hjj0ndnrnb" path="res://addons/ez-sfx-and-music/scenes/MusicPlayer/music_player.tscn" id="2_1t8mo"]
 [ext_resource type="PackedScene" uid="uid://bxtrut3adrouf" path="res://addons/fullscreen on input/fullscreen_on_input.tscn" id="2_gsa8r"]
-[ext_resource type="PackedScene" path="res://addons/quit on input/quit_on_input.tscn" id="3_k07nq"]
+[ext_resource type="PackedScene" uid="uid://bidyn0ewbbt4h" path="res://addons/ez music cuer/music_cuer.tscn" id="3_5ch56"]
+[ext_resource type="PackedScene" uid="uid://qil8fir5khaa" path="res://addons/quit on input/quit_on_input.tscn" id="3_k07nq"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_kelr6")
+max_fps = -1
+
+[node name="MusicPlayer" parent="." instance=ExtResource("2_1t8mo")]
+music_folder = "res://common/music"
+bus_name = "Music"
+
+[node name="MusicCuer" parent="MusicPlayer" instance=ExtResource("3_5ch56")]
+start_offset = 5.0
 
 [node name="FullscreenOnInput" parent="." instance=ExtResource("2_gsa8r")]
 

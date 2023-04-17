@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://5y8xpbsi0cy3"]
+
+[ext_resource type="PackedScene" uid="uid://qil8fir5khaa" path="res://addons/quit on input/quit_on_input.tscn" id="1_pn3ai"]
+[ext_resource type="Script" path="res://contributors/lopano/vector test/button.gd" id="2_n0lhl"]
+
+[node name="VectorTest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuitOnInput" parent="." instance=ExtResource("1_pn3ai")]
+
+[node name="Origin" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 569.0
+offset_top = 327.0
+offset_right = 601.0
+offset_bottom = 348.0
+
+[node name="ColorRect2" type="ColorRect" parent="Origin"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -195.0
+offset_right = 2.0
+offset_bottom = 196.0
+color = Color(0.627451, 0.87451, 0.627451, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Origin"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -195.0
+offset_right = 2.0
+offset_bottom = 196.0
+rotation = 1.57079
+pivot_offset = Vector2(1, 195)
+color = Color(0.627451, 0.87451, 0.627451, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="Origin"]
+layout_mode = 0
+offset_top = -195.0
+offset_right = 3.0
+offset_bottom = 196.0
+rotation = 0.785397
+pivot_offset = Vector2(1, 195)
+color = Color(0.882353, 0.756863, 0.858824, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="Origin"]
+layout_mode = 0
+offset_left = 0.00769043
+offset_top = -194.7
+offset_right = 3.00769
+offset_bottom = 196.3
+rotation = 2.35619
+pivot_offset = Vector2(0.999969, 195)
+color = Color(0.882353, 0.756863, 0.858824, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Origin"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 4.0
+offset_bottom = 4.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 229.0
+offset_right = 535.0
+offset_bottom = 260.0
+text = "BUTTON"
+script = ExtResource("2_n0lhl")
+
+[node name="ColorRect" type="ColorRect" parent="Button"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 3.0
+offset_bottom = 3.0
+color = Color(0.941176, 0.713726, 0.835294, 1)
+
+[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
+[connection signal="button_up" from="Button" to="Button" method="_on_button_up"]
