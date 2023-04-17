@@ -23,6 +23,7 @@ Malgrandaj Eroj (en: "Small Parts") is a project that intend to provide a fun ti
 13. All code in "res://common/" should follow the "GDScript style guide" and be documented in acordence with the "Writing guidelines" stated in the Godot Docs: [GDScript style guide](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html), [Writing guidelines](https://docs.godotengine.org/en/stable/contributing/documentation/docs_writing_guidelines.html).
 14. Addons installed from the Asset Library should not be modified in "res://addons/".
 15. The project should not exceed 5Gb in size.
+16. The project's releases must follow Semantic Versioning 2.0.0. [Link](https://semver.org/)
 
 ### Example of structure
 * addons/
