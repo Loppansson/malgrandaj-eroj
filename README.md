@@ -1,7 +1,7 @@
 # Malgrandaj Eroj
 Malgrandaj Eroj (en: "Small Parts") is a project that intend to provide a fun time while building a procedurally generated first-person open-world survival sandbox game in a low-poly style, featuring the GPLv3 License!
 
-## Rules for Collaboration. (0.1)
+## Rules for Collaboration (0.1.1)
 
 1. These rules are established with the following intent: To make developing the game promote as much subjective well-being as posible.
 2. Subjective well-being is difined as low negative affect, high positive affect, and high over-all life satisfaction.
