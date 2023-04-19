@@ -14,6 +14,7 @@ Malgrandaj Eroj (en: "Small Parts") is a project that intend to provide a fun ti
 	3. be open-world.
 	4. be in the sanbox and survival genres.
 	5. be in a low poly style, close to the work of Quaternius. (Using their work is recomended.)
+ 6. give proper support for a pasafist play-style.
 7. All additions to the game MUST be modular; They MUST NOT need change in any other part of the game to work in a technical sense, and they MUST NOT make it difficult to build the game further.
 8. The project SHOULD follow the "Best practices" stated in the Godot Docs: [Link.](https://docs.godotengine.org/en/stable/tutorials/best_practices/index.html)
 9. Every contributor get's one folder to them self; they're free to organize this folder to their liking.
