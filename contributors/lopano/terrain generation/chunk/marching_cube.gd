@@ -46,29 +46,21 @@ func _ready() -> void:
 	#--------------------------#
 	# Implementing Multithread #
 	#--------------------------#
-#	if not _is_set_up:
-#		if generator.threads_in_use < generator.thread_count:
-#			_start_thread()
-#		else:
-#			generator.connect(
-#					"thread_free",
-#					Callable(
-#							self,
-#							"_thread_freed"
-#					)
-#			)
+	if not _is_set_up:
+		if generator.threads_in_use < generator.thread_count:
+			_start_thread()
+		else:
+			generator.connect(
+					"thread_free",
+					Callable(
+							self,
+							"_thread_freed"
+					)
+			)
 	#--------------------------#
 	
 	
-	var _vertices = _get_vertices()
-
-	if len(_vertices) != 0:
-		var _packed_vertices = _pack_vertices(_vertices)
-		var _packed_normals = _pack_normals(_vertices)
-
-		_mesh_instance.mesh = _create_mesh(_packed_vertices, _packed_normals)
-
-		_mesh_instance.create_trimesh_collision.call_deferred()
+#	instance.create_trimesh_collision.call_deferred()
 
 
 
