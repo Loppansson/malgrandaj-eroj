@@ -1,13 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://lnm3irjcragt"]
+[gd_scene load_steps=14 format=3 uid="uid://cq8dh7kinymur"]
 
 [ext_resource type="PackedScene" uid="uid://71emmhb7enbq" path="res://common/player/player.tscn" id="1_05pjd"]
 [ext_resource type="Environment" uid="uid://balpc0jgt0tas" path="res://common/world/environment.tres" id="1_f2jlc"]
-[ext_resource type="PackedScene" uid="uid://dea6lia8qhm0p" path="res://common/world/terrain generation/generator.tscn" id="2_nyuxp"]
+[ext_resource type="PackedScene" uid="uid://bavbk4t47fef3" path="res://contributors/lopano/terrain generation/lopana_generator.tscn" id="2_oq4vc"]
 [ext_resource type="PackedScene" uid="uid://cygv0m43n3g65" path="res://addons/quaternius simple nature pack/static bodies/bush_1.tscn" id="4_rkpk8"]
 [ext_resource type="PackedScene" uid="uid://djb0yl6e0llhd" path="res://addons/quaternius simple nature pack/static bodies/rock_2.tscn" id="5_e1218"]
+[ext_resource type="PackedScene" uid="uid://bequc11bd1gwf" path="res://common/world/terrain generation/chunk/chunk_block.tscn" id="6_6a1d4"]
 [ext_resource type="PackedScene" uid="uid://kopcbpjf5sbn" path="res://addons/quaternius simple nature pack/static bodies/rock_3.tscn" id="6_sj00m"]
 [ext_resource type="PackedScene" uid="uid://t54m5opl3nv2" path="res://addons/quaternius simple nature pack/static bodies/tree_1.tscn" id="7_23v03"]
 [ext_resource type="PackedScene" uid="uid://b6g8yc62f2j5s" path="res://addons/quaternius simple nature pack/static bodies/grass_3.tscn" id="8_n2l4h"]
+[ext_resource type="Script" path="res://contributors/lopano/debug tools/hud.gd" id="11_qrwmf"]
+[ext_resource type="Material" uid="uid://8ylcw0h1lkhg" path="res://addons/kenney_prototype_tools/materials/orange/material_01.tres" id="12_mayhp"]
+[ext_resource type="Material" uid="uid://ddal25jay8fq1" path="res://addons/kenney_prototype_tools/materials/purple/material_01.tres" id="13_0erfh"]
+[ext_resource type="PackedScene" uid="uid://c5uu8v8wh00h0" path="res://contributors/lopano/debug tools/active_chunk_shower.tscn" id="13_0henu"]
 
 [node name="World" type="Node3D"]
 
@@ -15,30 +20,84 @@
 environment = ExtResource("1_f2jlc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.876508, -0.340332, 0.340451, 0, 0.70723, 0.706983, -0.481387, -0.619677, 0.619893, 0, 0, 0)
+transform = Transform3D(0.825399, -0.399128, 0.399267, 6.08838e-08, 0.70723, 0.706984, -0.56455, -0.583543, 0.583747, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Generato" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("2_nyuxp")]
+[node name="LopanaGenerator" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("2_oq4vc")]
+lods = false
+lods_distance_positions = Array[int]([0, 2, 4])
+lods_distance_subdivitions = Array[int]([4, 1, 0])
+intitial_generation_distance = Vector3(4, 4, 4)
 origin = NodePath("../Player")
 
+[node name="ActiveChunkShower" parent="LopanaGenerator" instance=ExtResource("13_0henu")]
+visible = false
+
 [node name="Objects" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.97449, 0)
 
-[node name="Bush1" parent="Objects" instance=ExtResource("4_rkpk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.52812, 4.76837e-07, -3.05797)
+[node name="Rock2" parent="Objects" instance=ExtResource("5_e1218")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 9.56719, -0.369492, 5.8461)
 
-[node name="Player" parent="." instance=ExtResource("1_05pjd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
+[node name="Rock3" parent="Objects" instance=ExtResource("6_sj00m")]
+transform = Transform3D(0.979162, -0.0511893, 0.196521, 7.51256e-10, 0.967709, 0.252069, -0.203078, -0.246817, 0.947545, 10.4137, -0.903189, 5.56602)
 
-[node name="Rock2" parent="." instance=ExtResource("5_e1218")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.61896, -0.369492, -2.24967)
+[node name="Tree1" parent="Objects" instance=ExtResource("7_23v03")]
+transform = Transform3D(-0.999995, 0, -0.0032284, 0, 1, 0, 0.0032284, 0, -0.999995, 11.7915, 0, 6.46519)
 
-[node name="Rock3" parent="." instance=ExtResource("6_sj00m")]
-transform = Transform3D(0.893238, -0.113326, 0.435067, 7.45058e-09, 0.967709, 0.252069, -0.449584, -0.225158, 0.864395, 5.36413, -0.903189, -2.7393)
-
-[node name="Tree1" parent="." instance=ExtResource("7_23v03")]
-transform = Transform3D(-0.965085, 0, -0.261936, 0, 1, 0, 0.261936, 0, -0.965085, 6.92775, 0, -2.22738)
-
-[node name="Grass3" parent="." instance=ExtResource("8_n2l4h")]
-transform = Transform3D(2.285, 0, 0, 0, 2.285, 0, 0, 0, 2.285, 3.32319, -1.78814e-07, -1.93584)
+[node name="Grass3" parent="Objects" instance=ExtResource("8_n2l4h")]
+transform = Transform3D(2.20714, 0, -0.591402, 0, 2.285, 0, 0.591402, 0, 2.20714, 8.23435, -1.78814e-07, 5.81386)
 collision_layer = 0
 collision_mask = 0
+
+[node name="Bush1" parent="Objects" instance=ExtResource("4_rkpk8")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 8.72272, 4.76837e-07, 4.78301)
+
+[node name="Player" parent="." instance=ExtResource("1_05pjd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.268, 7.463, 9.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
+visible = false
+script = ExtResource("11_qrwmf")
+
+[node name="PlayerPos" type="Label" parent="Player/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "Pos:"
+
+[node name="PlayerChunkPos" type="Label" parent="Player/CanvasLayer"]
+offset_top = 48.0
+offset_right = 65.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 32
+text = "Chunk Pos:"
+
+[node name="GroundPlane" parent="." instance=ExtResource("6_6a1d4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15, 0)
+
+[node name="MesuringSticks" type="Node3D" parent="."]
+visible = false
+
+[node name="CSGBox3D" type="CSGBox3D" parent="MesuringSticks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 5, -0.5)
+material_override = ExtResource("12_mayhp")
+size = Vector3(1, 10, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="MesuringSticks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -5, -0.5)
+material_override = ExtResource("13_0erfh")
+size = Vector3(1, 10, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="MesuringSticks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 5, -0.5)
+material_override = ExtResource("12_mayhp")
+size = Vector3(1, 10, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="MesuringSticks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, -5, -0.5)
+material_override = ExtResource("13_0erfh")
+size = Vector3(1, 10, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.778692, 0.102482, -0.61898, -1.86265e-09, 0.986569, 0.163343, 0.627406, -0.127194, 0.768234, -15.3728, 6.53811, 30.3482)

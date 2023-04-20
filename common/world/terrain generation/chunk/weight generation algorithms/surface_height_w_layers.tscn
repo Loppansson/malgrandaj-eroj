@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://80buajkopjtn"]
+
+[ext_resource type="Script" path="res://common/world/terrain generation/chunk/weight generation algorithms/surface_height_w_layers.gd" id="1_wwbvo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_21o6l"]
+fractal_lacunarity = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8qwsh"]
+noise_type = 2
+frequency = 0.04
+fractal_lacunarity = 1.0
+cellular_jitter = 0.963
+
+[node name="SurfaceHeightWLayers" type="Node3D"]
+script = ExtResource("1_wwbvo")
+noises = Array[FastNoiseLite]([SubResource("FastNoiseLite_21o6l"), SubResource("FastNoiseLite_8qwsh")])
+noise_amplitudes = Array[float]([40.0, 20.0])
+noise_toggles = Array[bool]([true, true])

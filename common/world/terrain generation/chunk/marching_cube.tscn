@@ -1,0 +1,69 @@
+[gd_scene load_steps=14 format=3 uid="uid://c3h3qe7icsrep"]
+
+[ext_resource type="Script" path="res://common/world/terrain generation/chunk/marching_cube.gd" id="1_1wf2p"]
+[ext_resource type="Material" uid="uid://bot3n5pgcjd08" path="res://common/world/terrain generation/chunk/grass.tres" id="1_ovtla"]
+[ext_resource type="Script" path="res://common/world/terrain generation/chunk/look_up_table.gd" id="3_vs8dv"]
+[ext_resource type="PackedScene" uid="uid://qq63nwconxw7" path="res://common/world/terrain generation/chunk/weight generation algorithms/noise_and_surface.tscn" id="4_c06xr"]
+[ext_resource type="PackedScene" uid="uid://b0u6srq3t1d85" path="res://common/world/terrain generation/chunk/weight generation algorithms/noise.tscn" id="5_2rcsr"]
+[ext_resource type="PackedScene" uid="uid://cy3thbbs620gd" path="res://common/world/terrain generation/chunk/weight generation algorithms/surface_height.tscn" id="6_cnk4j"]
+[ext_resource type="PackedScene" uid="uid://80buajkopjtn" path="res://common/world/terrain generation/chunk/weight generation algorithms/surface_height_w_layers.tscn" id="7_bq1xy"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gt5pc"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ciklc"]
+seed = 1
+frequency = 0.02
+fractal_lacunarity = 1.5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_abo4w"]
+frequency = 0.03
+offset = Vector3(0, -4, 0)
+fractal_lacunarity = 1.33
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f3hwv"]
+noise_type = 2
+frequency = 0.033
+fractal_lacunarity = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_21o6l"]
+fractal_lacunarity = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dt0jv"]
+noise_type = 2
+frequency = 0.019
+fractal_lacunarity = 1.0
+cellular_distance_function = 1
+cellular_jitter = 1.171
+domain_warp_enabled = true
+domain_warp_frequency = 0.046
+domain_warp_fractal_lacunarity = 1.0
+
+[node name="MarchingCubesMeshArray" type="MeshInstance3D"]
+material_override = ExtResource("1_ovtla")
+mesh = SubResource("ArrayMesh_gt5pc")
+
+[node name="MarchingCubes" type="Node3D" parent="." node_paths=PackedStringArray("_weight_generator")]
+script = ExtResource("1_1wf2p")
+subdivitions = 7.0
+_weight_generator = NodePath("SurfaceHeightWLayers")
+
+[node name="LookUpTable" type="Node3D" parent="MarchingCubes"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+script = ExtResource("3_vs8dv")
+
+[node name="NoiseAndSurface" parent="MarchingCubes" instance=ExtResource("4_c06xr")]
+noise = SubResource("FastNoiseLite_ciklc")
+offset = Vector3(0, -10, 0)
+
+[node name="Noise" parent="MarchingCubes" instance=ExtResource("5_2rcsr")]
+noise = SubResource("FastNoiseLite_abo4w")
+
+[node name="SurfaceHeight" parent="MarchingCubes" instance=ExtResource("6_cnk4j")]
+ground_level = -8.0
+noise = SubResource("FastNoiseLite_f3hwv")
+noise_amplitude = 16.0
+
+[node name="SurfaceHeightWLayers" parent="MarchingCubes" instance=ExtResource("7_bq1xy")]
+ground_level = -8.0
+noises = Array[FastNoiseLite]([SubResource("FastNoiseLite_21o6l"), SubResource("FastNoiseLite_dt0jv")])
+noise_amplitudes = Array[float]([20.0, 30.0])

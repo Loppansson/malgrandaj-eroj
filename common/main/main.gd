@@ -1,8 +1,8 @@
 extends Node3D
 
-## The Main manages the game at the top level. It for example loads the world.
+## Manages the game at the top level. It for example loads the world.
 
-## Limits the fps. No limit if <= 0.
+## If > 0, fps is limited to the set value.
 @export var max_fps := 144 as int
 @onready var world = preload("res://common/world/world.tscn")
 

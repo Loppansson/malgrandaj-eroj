@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://contributors/lopano/debug tools/headless tests/mutiple threads/headless.gd" id="1_njsug"]
+[ext_resource type="PackedScene" uid="uid://dqitiqjovi5q2" path="res://contributors/lopano/debug tools/headless tests/mutiple threads/child.tscn" id="2_0xfyl"]
+
+[node name="Headless" type="Node"]
+script = ExtResource("1_njsug")
+child = ExtResource("2_0xfyl")
+
+[connection signal="thread_free" from="." to="." method="_on_thread_free"]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bavbk4t47fef3"]
+
+[ext_resource type="Script" path="res://contributors/lopano/terrain generation/generator.gd" id="1_4weex"]
+[ext_resource type="PackedScene" uid="uid://c0atfi7jnwwxp" path="res://contributors/lopano/terrain generation/chunk/marching_cube.tscn" id="2_7bcbh"]
+
+[node name="LopanaGenerator" type="Node3D"]
+script = ExtResource("1_4weex")
+lods_distance_positions = Array[int]([0, 1, 2, 4])
+lods_distance_subdivitions = Array[int]([7, 3, 1, 0])
+intitial_generation_distance = Vector3(8, 4, 8)
+chunk_mesh = ExtResource("2_7bcbh")
+
+[connection signal="thread_free" from="." to="." method="_on_thread_free"]
