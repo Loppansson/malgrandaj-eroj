@@ -7,4 +7,8 @@
 script = ExtResource("1_nqdu0")
 child = ExtResource("2_at8pl")
 
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_right = 834.0
+offset_bottom = 478.0
+
 [connection signal="thread_free" from="." to="." method="_on_thread_free"]

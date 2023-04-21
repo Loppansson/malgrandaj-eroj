@@ -13,8 +13,6 @@ func _ready():
 	#-- For Headles --------------------------------------------------#
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
 	#-----------------------------------------------------------------#
-	
-	
 	for i in range(thread_count):
 		threads.append(Thread.new())
 		threads_use_state.append(false)
@@ -22,10 +20,16 @@ func _ready():
 	var instance_1 = child.instantiate()
 	var instance_2 = child.instantiate()
 	var instance_3 = child.instantiate()
+	var instance_4 = child.instantiate()
+	var instance_5 = child.instantiate()
+	var instance_6 = child.instantiate()
 	
 	add_child(instance_1)
 	add_child(instance_2)
 	add_child(instance_3)
+	add_child(instance_4)
+	add_child(instance_5)
+	add_child(instance_6)
 
 func _process(delta):
 	_time_buildup += delta

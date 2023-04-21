@@ -7,10 +7,14 @@ extends Node3D
 ## How far from the origin chunks generate.
 @export var generation_distance := 4 as int
 
-# Hack: LODs
+#----------------#
+# Atempt at LODs # 
+#----------------#
+## [b]Currently broken.[/b]
 @export var lods := true 
 @export var lods_distance_positions: Array[int]
 @export var lods_distance_subdivitions: Array[int]
+#----------------#
 
 ## How far from the origin chunks are generated on _read().
 @export var intitial_generation_distance := Vector3(4.0, 4.0, 4.0)
@@ -98,7 +102,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if _origin_moved_chunk():
-		_update_at_render_distance()
+		for _distance in lods_distance_positions:
+			if _distance <= generation_distance:
+				_update_at_render_distance(_distance)
 		_update_active_chunk()
 	
 	#--------------------------#
@@ -122,14 +128,12 @@ func _exit_tree():
 
 func _on_thread_free():
 	pass
-#	prints("(", _time_buildup, ") threads_in_use:", threads_in_use)
-#	print()
 #---------------------------------------------------------------------------#
 
-func _update_at_render_distance():
+func _update_at_render_distance(distance):
 	var chunks_to_render := []
 	
-	var rd := generation_distance as int
+	var rd := distance as int
 	
 	var point_1 = _active_chunk - Vector3.ONE * rd
 	var point_2 = _active_chunk + Vector3.ONE * (rd + 1)
@@ -147,7 +151,7 @@ func _update_at_render_distance():
 			chunks_to_render.append(coord)
 	
 	for chunk in chunks_to_render:
-		_generate_chunk(chunk, true)
+		_generate_chunk(chunk, lods)
 
 
 
@@ -163,11 +167,6 @@ func _get_coords_between_coords(_point_1: Vector3, _point_2: Vector3):
 						_z + _point_1.z
 				))
 	return _coords
-
-func _generate_slices_at_lod_distances():
-	for distance in lods_distance_positions:
-		_generate_slice_at_distance(distance)
-
 
 
 ## Returns the chunk _position is in.
@@ -203,92 +202,6 @@ func _generate_plane_generation_distance(_y: int, _initial_generation := false):
 			):
 				_generate_chunk(Vector3(_x, _y, _z))
 
-
-## Generates chunks at the egde of generation_distance in the direction origin 
-## is moving. (Works both side-ways and up and down.)
-func _generate_slice_at_distance(_distance: int):
-	var _axis = _check_direction(_last_chunk, _active_chunk)
-	# Hack: With out the " - 1" there's always a gap in the generation? 
-	var _generation_distance = _distance
-	var _generation_width = _distance
-	
-	for _part in range(-_generation_distance, _generation_distance):
-		var _relative_from: Vector3
-		var _relative_to: Vector3
-		
-		# Hack: It feel to me like there got to be a bettre way than this?
-		match _axis:
-			"-x":
-				_relative_from = Vector3(
-						-_generation_distance, 
-						_part, 
-						-_generation_width
-				)
-				_relative_to = Vector3(
-						-_generation_distance, 
-						_part, 
-						_generation_width
-				)
-			"x":
-				_relative_from = Vector3(
-						_generation_distance, 
-						_part, 
-						-_generation_width
-				)
-				_relative_to = Vector3(
-						_generation_distance, 
-						_part, 
-						_generation_width
-				)
-			"-y":
-				_relative_from = Vector3(
-						_part,
-						-_generation_distance, 
-						-_generation_width
-				)
-				_relative_to = Vector3(
-						_part, 
-						-_generation_distance, 
-						_generation_width
-				)
-			"y":
-				_relative_from = Vector3(
-						_part, 
-						_generation_distance, 
-						-_generation_width
-						)
-				_relative_to = Vector3(
-						_part, 
-						_generation_distance, 
-						_generation_width
-				)
-			"-z":
-				_relative_from = Vector3(
-						-_generation_width, 
-						_part, 
-						-_generation_distance
-				)
-				_relative_to = Vector3(
-						_generation_width, 
-						_part, 
-						-_generation_distance
-				)
-			"z":
-				_relative_from = Vector3(
-						-_generation_width, 
-						_part, 
-						_generation_distance
-				)
-				_relative_to = Vector3(
-						_generation_width, 
-						_part, 
-						_generation_distance
-				)
-		
-		_generate_chunk_line(
-				_relative_from + _active_chunk,
-				_relative_to + _active_chunk
-		)
 
 ## Generates all the chunks with in render distance.
 func _generate_full_generation_distance(_initial_generation := false):
@@ -339,27 +252,6 @@ func _generate_full_generation_distance(_initial_generation := false):
 								"%"
 						)
 
-## Generates chunks in a line, from _from to _to. _from and _to need to
-## share two values to align.
-func _generate_chunk_line(_from: Vector3, _to: Vector3):
-	var _axis = _check_direction(_from, _to)
-	
-	if _axis == "x" or _axis == "-x":
-		for x in range(abs(_to.x - _from.x)):
-			_generate_chunk(
-					Vector3(min(_from.x, _to.x) + x, _from.y, _from.z)
-			)
-	if _axis == "y" or _axis == "-y":
-		for y in range(abs(_to.y - _from.y)):
-			_generate_chunk(
-					Vector3(_from.x, min(_from.y, _to.y) + y, _from.z)
-			)
-	if _axis == "z" or _axis == "-z":
-		for z in range(abs(_to.z - _from.z)):
-			_generate_chunk(
-					Vector3(_from.x, _from.y, min(_from.z, _to.z) + z)
-			)
-
 
 ## Returns which axis _position_2 most points towards in relation to 
 ## _position_1.
@@ -401,17 +293,20 @@ func _origin_moved_chunk():
 
 
 func _generate_chunk(_chunk_coordinate: Vector3, _over_write := false):
+	_over_write = false
 	if _chunk_is_empty(_chunk_coordinate) or _over_write:
+		var _chunk_name = (
+				str(_chunk_coordinate.x) + ", " +
+				str(_chunk_coordinate.y) + ", " +
+				str(_chunk_coordinate.z)
+		)
+#		if not _chunk_is_empty(_chunk_coordinate) and _over_write:
+#			get_node(_chunk_name).queue_free()
+		
+		
 		var _instance = chunk_mesh.instantiate() as MeshInstance3D
 		_instance.set("position", _chunk_coordinate * chunk_size)
-		_instance.set(
-				"name", 
-				(
-						str(_chunk_coordinate.x) + ", " +
-						str(_chunk_coordinate.y) + ", " +
-						str(_chunk_coordinate.z)
-				)
-		)
+		_instance.set("name", _chunk_name)
 		
 		# Hack: LODs
 		
@@ -457,6 +352,7 @@ func _generate_chunk(_chunk_coordinate: Vector3, _over_write := false):
 						).subdivitions = lods_distance_subdivitions[i]
 		
 		
+		
 		var _db_string: String
 		
 		var _x = _chunk_coordinate.x
@@ -465,6 +361,9 @@ func _generate_chunk(_chunk_coordinate: Vector3, _over_write := false):
 		
 		if _chunks.has(_x):
 			if _chunks[_x].has(_y):
+				if _over_write and _chunks[_x][_y].has(_z):
+					_chunks[_x][_y][_z].queue_free()
+				
 				_chunks[_x][_y].merge(
 					{_z: _instance},
 					_over_write
@@ -480,13 +379,15 @@ func _generate_chunk(_chunk_coordinate: Vector3, _over_write := false):
 
 
 func _chunk_is_empty(_chunk_coordinate: Vector3):
-	if (
-			not _chunks.find_key(_chunk_coordinate.x)
-			and not _chunks.find_key(_chunk_coordinate.y)
-			and not _chunks.find_key(_chunk_coordinate.z)
-	):
-		return true
-	return false
+	var _x = _chunk_coordinate.x
+	var _y = _chunk_coordinate.y
+	var _z = _chunk_coordinate.z
+	
+	if _chunks.has(_x):
+		if _chunks[_x].has(_y):
+			if _chunks[_x][_y].has(_z):
+				return false
+	return true
 
 
 func _db_print_chunks():
