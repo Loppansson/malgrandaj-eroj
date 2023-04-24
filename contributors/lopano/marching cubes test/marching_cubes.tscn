@@ -1,12 +1,9 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=9 format=3 uid="uid://ddriuif17pjf"]
 
 [ext_resource type="PackedScene" uid="uid://qil8fir5khaa" path="res://addons/quit on input/quit_on_input.tscn" id="2_fajak"]
 [ext_resource type="PackedScene" uid="uid://71emmhb7enbq" path="res://common/player/player.tscn" id="2_pwemi"]
-[ext_resource type="PackedScene" path="res://common/world/terrain generation/chunk/marching_cube.tscn" id="3_e25lr"]
+[ext_resource type="PackedScene" uid="uid://c0atfi7jnwwxp" path="res://contributors/lopano/terrain generation/chunk/marching_cube.tscn" id="3_0dj8i"]
 [ext_resource type="Material" uid="uid://bot3n5pgcjd08" path="res://common/world/terrain generation/chunk/grass.tres" id="4_0tpqo"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8goh2"]
-cull_mode = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_nicgk"]
 
@@ -33,9 +30,8 @@ omni_range = 13.8903
 
 [node name="QuitOnInput" parent="." instance=ExtResource("2_fajak")]
 
-[node name="MarchingCube" parent="." instance=ExtResource("3_e25lr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-material_override = SubResource("StandardMaterial3D_8goh2")
+[node name="MarchingCubesMeshArray" parent="." instance=ExtResource("3_0dj8i")]
+smoothing = false
 
 [node name="ReferenceBox" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.5, 0.5)

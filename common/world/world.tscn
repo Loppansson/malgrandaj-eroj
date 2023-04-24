@@ -24,11 +24,8 @@ transform = Transform3D(0.825399, -0.399128, 0.399267, 6.08838e-08, 0.70723, 0.7
 shadow_enabled = true
 
 [node name="LopanaGenerator" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("2_oq4vc")]
-generation_distance = 8
-lods = false
-lods_distance_positions = Array[int]([2, 3, 4])
-lods_distance_subdivitions = Array[int]([3, 1, 0])
-intitial_generation_distance = Vector3(8, 8, 8)
+generation_distance = 3
+intitial_generation_distance = Vector3(12, 3, 12)
 intitial_generation_offset = Vector3(0, -1, 0)
 origin = NodePath("../Player")
 

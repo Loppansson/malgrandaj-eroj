@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Malgrandaj Eroj"
+config/description="A procedurally generated first-person open-world survival sandbox game in a low-poly style, featuring GPLv3!"
 run/main_scene="res://common/main/main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [autoload]
 

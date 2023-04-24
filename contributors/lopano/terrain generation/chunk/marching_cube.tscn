@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0atfi7jnwwxp"]
+[gd_scene load_steps=11 format=3 uid="uid://c0atfi7jnwwxp"]
 
 [ext_resource type="Material" uid="uid://bot3n5pgcjd08" path="res://common/world/terrain generation/chunk/grass.tres" id="1_l5bsf"]
 [ext_resource type="Script" path="res://contributors/lopano/terrain generation/chunk/marching_cube.gd" id="2_wunfo"]
@@ -8,26 +8,38 @@
 [ext_resource type="PackedScene" uid="uid://c8dl8rvfoykdv" path="res://contributors/lopano/terrain generation/chunk/weight generation algorithms/surface_height.tscn" id="6_awusi"]
 [ext_resource type="PackedScene" uid="uid://jqvt4em0xpcu" path="res://contributors/lopano/terrain generation/chunk/weight generation algorithms/surface_height_w_layers.tscn" id="7_two4y"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8siam"]
+seed = 1
+frequency = 0.027
+fractal_lacunarity = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gk6c0"]
+seed = 2
+frequency = 0.02
+fractal_lacunarity = 1.0
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_gt5pc"]
 
-[node name="MarchingCubesMeshArray" type="MeshInstance3D"]
-material_override = ExtResource("1_l5bsf")
-mesh = SubResource("ArrayMesh_gt5pc")
-
-[node name="MarchingCubes" type="Node3D" parent="." node_paths=PackedStringArray("_weight_generator")]
+[node name="MarchingCubes" type="Node3D" node_paths=PackedStringArray("_weight_generator")]
 script = ExtResource("2_wunfo")
-subdivitions = 1.0
-_weight_generator = NodePath("NoiseAndSurface")
+_weight_generator = NodePath("SurfaceHeightWLayers")
+lod = 0
 
-[node name="LookUpTable" type="Node3D" parent="MarchingCubes"]
+[node name="LookUpTable" type="Node3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 script = ExtResource("3_37aio")
 
-[node name="Noise" parent="MarchingCubes" instance=ExtResource("4_a5f7c")]
+[node name="Noise" parent="." instance=ExtResource("4_a5f7c")]
+noise = SubResource("FastNoiseLite_8siam")
 
-[node name="NoiseAndSurface" parent="MarchingCubes" instance=ExtResource("5_thhgj")]
-weight_gain = 0.0
+[node name="NoiseAndSurface" parent="." instance=ExtResource("5_thhgj")]
+noise = SubResource("FastNoiseLite_gk6c0")
+weight_gain = -0.2
 
-[node name="SurfaceHeight" parent="MarchingCubes" instance=ExtResource("6_awusi")]
+[node name="SurfaceHeight" parent="." instance=ExtResource("6_awusi")]
 
-[node name="SurfaceHeightWLayers" parent="MarchingCubes" instance=ExtResource("7_two4y")]
+[node name="SurfaceHeightWLayers" parent="." instance=ExtResource("7_two4y")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_l5bsf")
+mesh = SubResource("ArrayMesh_gt5pc")

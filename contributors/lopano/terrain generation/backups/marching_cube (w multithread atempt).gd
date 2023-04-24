@@ -1,25 +1,5 @@
 extends Node3D
 
-#=-------------------------------------------------------=#
-#                   -= ACTIVE GOALS =-                    #
-#=-------------------------------------------------------=#
-#                          LODs                           #  
-#=-------------------------------------------------------=#
-# Give the MarchingCubes the ability renader at different #
-# LODs. The steps between different LODs MUST be seem-    #
-# less; gaps that allow the player to see through the are #
-# NOT allowed world.                                      #
-#                                                         #
-# Subgoals:                                               #
-#  - Be able to move a spesific vertex of the marching    #
-#    cube up and down manualy.                            #
-#  - Be able to move every other vertext up and down in   #
-#    some kind of loop.                                   #
-#  - Make the the frequency based on a variable; every    #
-#    other, third, forth, ect.                            #
-#                                                         #
-#=-------------------------------------------------------=#
-
 ## Gives a parent MeshInstance an ArrayMesh from data using the MarchingCubes 
 ## concept. 
 ##
@@ -52,104 +32,152 @@ const _RELATIVE_CORNER_COORDS = [
 var _mesh_instance: MeshInstance3D
 @onready var look_up_table = $"LookUpTable"
 
-
-#----------------#
-# Atempt at LODs #
-#----------------#
-@export var lod = 1
-var vertices = {
-	"local_positions":[],
-	"global_positions":[],
-	"is_in":[]
-}
-#----------------#
-
-
+#--------------------------#
+# Implementing Multithread #
+#--------------------------#
+## Currently not working.
+@export var use_multithread := false
+var generator
+var _is_set_up = false
+var _used_thread_index := -1 as int
+#--------------------------#
 
 func _ready() -> void:
-	_get_mesh_instance()
+	_set_up_parent()
 	
+	#--------------------------#
+	# Implementing Multithread #
+	#--------------------------#
+	if not _is_set_up and use_multithread:
+		if generator.threads_in_use < generator.thread_count:
+			_start_thread()
+		else:
+			generator.connect(
+					"thread_free",
+					Callable(
+							self,
+							"_thread_freed"
+					)
+			)
+	#--------------------------#
+	else:
+		var _vertices = _get_vertices()
+		if len(_vertices) != 0:
+			var _packed_vertices = _pack_vertices(_vertices)
+			var _packed_normals = _pack_normals(_vertices)
+			
+			_mesh_instance.mesh = _create_mesh(
+					_packed_vertices, 
+					_packed_normals
+			)
+			
+			_mesh_instance.create_trimesh_collision.call_deferred()
 	
-	#----------------#
-	# Atempt at LODs #
-	#----------------#
-	if lod > 0:
-		subdivitions = pow(2, lod) - 1
-	#----------------#	
+#	instance.create_trimesh_collision.call_deferred()
+
+
+
+
+
+
+#--------------------------#
+# Implementing Multithread #
+#--------------------------#------------------------------------------------#
+func _thread_freed():
+	if generator.threads_in_use < generator.thread_count and not _is_set_up:
+		_start_thread()
+
+
+func _start_thread():
+	for thread_i in range(len(generator.threads)):
+		
+		if (
+				not generator.threads_use_state[thread_i]
+				and _used_thread_index == -1
+		):
+			generator.threads[thread_i].start(
+					Callable(
+							self, 
+							"_thread_function_with_return"
+					).bind("Wafflecopter")
+			)
+			generator.threads_use_state[thread_i] = true
+			generator.threads_in_use += 1
+			
+			_used_thread_index = thread_i
+			
+#			print("Thread ", thread_i, " started.")
+			break
+
+
+func _thread_function_with_return(userdata):
+	var _vertices = _get_vertices()
 	
-	vertices = _get_vertices()
+	call_deferred("_thread_task_finished", _vertices)
+
+
+func _thread_task_finished(_returned_array):
+	generator.threads[_used_thread_index].wait_to_finish()
 	
-#	print(vertices["local_positions"])
-#	print(vertices["global_positions"])
+	generator.threads_use_state[_used_thread_index] = false
+	generator.threads_in_use -= 1
+#	prints(
+#			"Thread", 
+#			_used_thread_index, 
+#			"finnished"
+#	)
+	generator.emit_signal("thread_free")
 	
-	if len(vertices["global_positions"]) != 0:
-		#----------------#
-		# Atempt at LODs #
-		#----------------#
+	_is_set_up = true
+	_used_thread_index = -1
+	
+	if len(_returned_array) != 0:
+		var _packed_vertices = _pack_vertices(_returned_array)
+		var _packed_normals = _pack_normals(_returned_array)
 		
-		pass
-#		print(vertices["global_positions"])
-		
-		
-#		if lod > 0:
-#			for i in range(len(vertices["global_positions"])):
-#				var vertex_global_pos = vertices["global_positions"][i]
-#				var vertex_local_pos = vertices["local_positions"][i]
-#				if not (vertex_local_pos.y == 0 or vertex_local_pos.y == 1): 
-#					if vertex_global_pos.x == global_position.x:
-#						prints(
-#								subdivitions,
-#								vertex_local_pos,
-#								vertex_local_pos.z * (subdivitions + 1)
-#						)
-		
-		
-		#----------------#
-		
-		
-		
-		var _packed_vertices = _pack_vertices(vertices["local_positions"])
-		var _packed_normals = _pack_normals(vertices["local_positions"])
-		
-		_mesh_instance.mesh = _create_mesh(
-				_packed_vertices, 
-				_packed_normals
-		)
+		_mesh_instance.mesh = _create_mesh(_packed_vertices, _packed_normals)
 		
 		_mesh_instance.create_trimesh_collision.call_deferred()
+	
+#---------------------------------------------------------------------------#
+
+
+
+
+
 
 
 ## Makes sure that parent is of correct type (MeshInstance3D), and stores it.
-func _get_mesh_instance():
+func _set_up_parent():
 	assert(
-			$MeshInstance3D as MeshInstance3D,
+			get_parent() as MeshInstance3D,
 			"Parent is not of type MeshInstance3D"
 	)
-	_mesh_instance = $MeshInstance3D
+	_mesh_instance = get_parent()
 	
+	#--------------------------#
+	# Implementing Multithread #
+	#--------------------------#
+	generator = _mesh_instance.get_parent()
+	#--------------------------#
 
 
 ## Returns an arraya containing all the vertecies to be generated within the 
 ## marching cube collection.
 func _get_vertices():
-	var _result := {
-		"local_positions":[],
-		"global_positions":[]
-	}
+	var found_vertices := []
 	
 	for z in range(subdivitions + 1):
 		for y in range(subdivitions + 1):
 			for x in range(subdivitions + 1):
-				var _vertices = _get_segment_vertices(
+				found_vertices += _get_segment_vertices(
 						x, 
 						y, 
 						z, 
 						_RELATIVE_CORNER_COORDS
 				)
-				_result["local_positions"] += _vertices["local_positions"]
-				_result["global_positions"] += _vertices["global_positions"]
 	
-	return _result
+	return found_vertices
 
 
 ## Returns the vertecies of a segment.
@@ -161,13 +189,21 @@ func _get_segment_vertices(x, y, z, _RELATIVE_CORNER_COORDS):
 			* side_length
 	)
 	
-	
 	var _corner_weights = _weight_generator._generate_corner_weights(
 			_subdivition_position, 
 			_subdivition_fraction
 	)
 	
 	var _marching_cubes_case = _find_marching_cube_case(_corner_weights)
+	
+#	for i in range(256):
+#		var triangulation = _triangulate_marching_cubes_case(i)
+#		print(len(_triangulation_to_vertices(
+#				triangulation,
+#				_subdivition_fraction,
+#				_subdivition_position,
+#				_corner_weights
+#		)))
 	
 	var triangulation = _triangulate_marching_cubes_case(_marching_cubes_case)
 	
@@ -177,6 +213,7 @@ func _get_segment_vertices(x, y, z, _RELATIVE_CORNER_COORDS):
 			_subdivition_position,
 			_corner_weights
 	)
+	
 	return found_vertices
 
 
@@ -205,10 +242,7 @@ func _triangulation_to_vertices(
 		_subdivition_position,
 		_corner_weights
 	):
-	var found_vertices := {
-		"local_positions":[],
-		"global_positions":[]
-	}
+	var found_vertices := []
 	for edge_index in triangulation:
 		var _edge_vertex_index_1 = look_up_table.EdgeVertexIndices[edge_index][0]
 		var _edge_vertex_index_2 = look_up_table.EdgeVertexIndices[edge_index][1]
@@ -229,9 +263,7 @@ func _triangulation_to_vertices(
 		var _scaled_edge_coord = bettween_point * _subdivition_fraction * side_length
 		
 		var vertex_position = _subdivition_position + _scaled_edge_coord
-		
-		found_vertices["local_positions"].append(vertex_position)
-		found_vertices["global_positions"].append(vertex_position + _subdivition_position + global_position)
+		found_vertices.append(vertex_position)
 	
 	return found_vertices
 
