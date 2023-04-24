@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bidyn0ewbbt4h" path="res://addons/ez music cuer/music_cuer.tscn" id="3_5ch56"]
 [ext_resource type="PackedScene" uid="uid://qil8fir5khaa" path="res://addons/quit on input/quit_on_input.tscn" id="3_k07nq"]
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node"]
 script = ExtResource("1_kelr6")
 max_fps = -1
 
