@@ -1,14 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://51v7ae03ea23"]
+[gd_scene load_steps=4 format=3 uid="uid://dg1tcrcvovy8d"]
 
-[ext_resource type="Script" path="res://contributors/lopano/menu concept/main.gd" id="1_2b716"]
-[ext_resource type="PackedScene" uid="uid://b8s63vawoht38" path="res://contributors/lopano/menu concept/main_menu.tscn" id="2_jf4uc"]
+[ext_resource type="Script" path="res://contributors/lopano/menu concept/scene_manager.gd" id="1_0reey"]
 [ext_resource type="PackedScene" uid="uid://bxtrut3adrouf" path="res://addons/fullscreen on input/fullscreen_on_input.tscn" id="3_e5gxn"]
 [ext_resource type="PackedScene" uid="uid://qil8fir5khaa" path="res://addons/quit on input/quit_on_input.tscn" id="4_13uc3"]
 
 [node name="Main" type="Node"]
-script = ExtResource("1_2b716")
-scenes = Array[PackedScene]([ExtResource("2_jf4uc")])
 
 [node name="FullscreenOnInput" parent="." instance=ExtResource("3_e5gxn")]
 
 [node name="QuitOnInput" parent="." instance=ExtResource("4_13uc3")]
+
+[node name="SceneManager" type="Node" parent="."]
+script = ExtResource("1_0reey")
