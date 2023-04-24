@@ -16,3 +16,11 @@ input_crouch_action_name = "move_crouch"
 input_fly_mode_action_name = "move_fly_mode"
 underwater_env = ExtResource("3_7xrc3")
 rotation_to_move = false
+
+[node name="Fly Ability 3D" parent="." index="6"]
+speed_modifier = 10.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera" index="0"]
+light_energy = 2.814
+spot_range = 23.1871
+spot_angle = 70.717

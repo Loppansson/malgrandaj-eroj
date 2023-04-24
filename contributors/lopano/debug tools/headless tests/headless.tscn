@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://8gqbpbww2ega"]
+
+[ext_resource type="Script" path="res://contributors/lopano/debug tools/headless tests/headless.gd" id="1_1h4e8"]
+
+[node name="Headless" type="Node"]
+script = ExtResource("1_1h4e8")

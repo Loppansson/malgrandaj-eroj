@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2x6w3yrbur4"]
+
+[ext_resource type="Script" path="res://contributors/lopano/debug tools/headless tests/mutiple threads/headless.gd" id="1_nqdu0"]
+[ext_resource type="PackedScene" path="res://contributors/lopano/debug tools/headless tests/mutiple threads/child.tscn" id="2_at8pl"]
+
+[node name="Headless" type="Node"]
+script = ExtResource("1_nqdu0")
+child = ExtResource("2_at8pl")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_right = 834.0
+offset_bottom = 478.0
+
+[connection signal="thread_free" from="." to="." method="_on_thread_free"]

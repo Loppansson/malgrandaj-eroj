@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://qq63nwconxw7"]
+
+[ext_resource type="Script" path="res://common/world/terrain generation/chunk/weight generation algorithms/noise_and_surface.gd" id="1_j4hh6"]
+
+[node name="NoiseAndSurface" type="Node3D"]
+script = ExtResource("1_j4hh6")

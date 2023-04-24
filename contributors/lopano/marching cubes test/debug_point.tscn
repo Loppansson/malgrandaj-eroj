@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://15xv6wvukach"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xlkd7"]
+size = Vector3(0.01, 0.01, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3cgdy"]
+transparency = 1
+
+[node name="DebugPoint" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_xlkd7")
+surface_material_override/0 = SubResource("StandardMaterial3D_3cgdy")

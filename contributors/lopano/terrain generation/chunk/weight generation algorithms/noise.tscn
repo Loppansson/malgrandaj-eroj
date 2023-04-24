@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b27d6jk3jqlm5"]
+
+[ext_resource type="Script" path="res://common/world/terrain generation/chunk/weight generation algorithms/noise.gd" id="1_xv1ng"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h33t0"]
+frequency = 0.02
+fractal_lacunarity = 1.0
+
+[node name="Noise" type="Node3D"]
+script = ExtResource("1_xv1ng")
+noise = SubResource("FastNoiseLite_h33t0")
