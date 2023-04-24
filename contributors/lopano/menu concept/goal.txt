@@ -1,0 +1,10 @@
+#=---------------------=#
+# Creating a Menu Sytem #
+#=---------------------=#
+
+The menu should:
+	- be well documented.
+	- clearly written.
+	- be able to change between menues.
+	- be able to load the world scene.
+	- handle sub-menues.

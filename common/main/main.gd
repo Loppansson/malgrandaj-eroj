@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 ## Manages the game at the top level. It for example loads the world.
 
