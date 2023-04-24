@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://51v7ae03ea23"]
+
+[ext_resource type="Script" path="res://contributors/lopano/menu concept/main.gd" id="1_2b716"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_2b716")
