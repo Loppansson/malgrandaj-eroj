@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_bbwqf")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6
 
 [node name="TitleLabel" type="Label" parent="."]
 layout_mode = 1
