@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cr2gxsga8kwei"]
+[gd_scene load_steps=10 format=3 uid="uid://cr2gxsga8kwei"]
 
 [ext_resource type="Script" path="res://common/main/main.gd" id="1_kelr6"]
 [ext_resource type="PackedScene" uid="uid://b65hjj0ndnrnb" path="res://addons/ez-sfx-and-music/scenes/MusicPlayer/music_player.tscn" id="2_1t8mo"]
 [ext_resource type="PackedScene" uid="uid://bxtrut3adrouf" path="res://addons/fullscreen on input/fullscreen_on_input.tscn" id="2_gsa8r"]
 [ext_resource type="PackedScene" uid="uid://bidyn0ewbbt4h" path="res://addons/ez music cuer/music_cuer.tscn" id="3_5ch56"]
 [ext_resource type="PackedScene" uid="uid://qil8fir5khaa" path="res://addons/quit on input/quit_on_input.tscn" id="3_k07nq"]
+[ext_resource type="Script" path="res://contributors/lopano/menu concept/scene_manager.gd" id="6_fg48f"]
+[ext_resource type="PackedScene" uid="uid://ok5n0amv4kpu" path="res://common/ui/menus/main_menu.tscn" id="7_5k0wh"]
+[ext_resource type="PackedScene" uid="uid://cq8dh7kinymur" path="res://common/world/world.tscn" id="8_0k58n"]
+[ext_resource type="PackedScene" uid="uid://bve36bjurmspl" path="res://common/ui/menus/loading_screen.tscn" id="8_kjeo6"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_kelr6")
@@ -20,3 +24,7 @@ start_offset = 5.0
 [node name="FullscreenOnInput" parent="." instance=ExtResource("2_gsa8r")]
 
 [node name="QuitOnInput" parent="." instance=ExtResource("3_k07nq")]
+
+[node name="SceneManager" type="Node" parent="."]
+script = ExtResource("6_fg48f")
+scenes = Array[PackedScene]([ExtResource("7_5k0wh"), ExtResource("8_kjeo6"), ExtResource("8_0k58n")])

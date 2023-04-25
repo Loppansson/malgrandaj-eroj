@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ok5n0amv4kpu"]
+[gd_scene load_steps=3 format=3 uid="uid://ok5n0amv4kpu"]
 
 [ext_resource type="PackedScene" uid="uid://dfwtpcho00mk" path="res://contributors/lopano/menu concept/change_scene_button.tscn" id="1_ix4xa"]
+[ext_resource type="Texture2D" uid="uid://debiu5u818xm4" path="res://common/ui/menus/main_menu_background.png" id="2_bbwqf"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,6 +11,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bbwqf")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="TitleLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -17,20 +29,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -103.5
-offset_top = -100.0
-offset_right = 103.5
-offset_bottom = -44.0
+offset_left = -144.5
+offset_top = -160.0
+offset_right = 144.5
+offset_bottom = -104.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 38
-text = "Main Menu"
+text = "Malgrandaj Eroj"
 
 [node name="ChangeSceneButton" parent="." instance=ExtResource("1_ix4xa")]
 layout_mode = 1
 offset_left = -43.0
-offset_top = -15.5
+offset_top = -75.5
 offset_right = 43.0
-offset_bottom = 15.5
-text = "Sub Menu"
-next_scene = "SubMenu"
+offset_bottom = -44.5
+text = "Start"
+next_scene = "LoadingScreen"
