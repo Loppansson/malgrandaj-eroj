@@ -83,3 +83,34 @@ func get_status_default(name: String) -> int:
 func get_status_current(name: String) -> int:
 	return status_current[get_status_index(name)]
 
+
+func set_status_min(name: String, value: int) -> void:
+	status_min[get_status_index(name)] = value
+
+
+func set_status_max(name: String, value: int) -> void:
+	status_max[get_status_index(name)] = value
+
+
+func set_status_default(name: String, value: int) -> void:
+	status_default[get_status_index(name)] = value
+
+
+func set_status_current(name: String, value: int) -> void:
+	status_current[get_status_index(name)] = value
+
+
+func add_status_min(name: String, value: int) -> void:
+	status_min[get_status_index(name)] += value
+
+
+func add_status_max(name: String, value: int) -> void:
+	status_max[get_status_index(name)] += value
+
+
+func add_status_default(name: String, value: int) -> void:
+	status_default[get_status_index(name)] += value
+
+
+func add_status_current(name: String, value: int) -> void:
+	status_current[get_status_index(name)] += value
