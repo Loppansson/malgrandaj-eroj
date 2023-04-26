@@ -192,7 +192,7 @@ func _find_marching_cube_case(_corner_weights: Array):
 func _triangulate_marching_cubes_case(_marching_cubes_case: int):
 	var triangulation = []
 	
-	for value in look_up_table.TriangleTable[_marching_cubes_case]:
+	for value in look_up_table.triangulation_table[_marching_cubes_case]:
 		triangulation.append(value)
 	triangulation.pop_back()
 	
@@ -210,8 +210,8 @@ func _triangulation_to_vertices(
 		"global_positions":[]
 	}
 	for edge_index in triangulation:
-		var _edge_vertex_index_1 = look_up_table.EdgeVertexIndices[edge_index][0]
-		var _edge_vertex_index_2 = look_up_table.EdgeVertexIndices[edge_index][1]
+		var _edge_vertex_index_1 = look_up_table.edge_vertex_indices[edge_index][0]
+		var _edge_vertex_index_2 = look_up_table.edge_vertex_indices[edge_index][1]
 		
 		var _corner_1_pos = _RELATIVE_CORNER_COORDS[_edge_vertex_index_1]
 		var _corner_2_pos = _RELATIVE_CORNER_COORDS[_edge_vertex_index_2]
