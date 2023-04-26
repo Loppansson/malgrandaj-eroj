@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://broifkoebt44g"]
+
+[ext_resource type="Script" path="res://common/player/fall damage/fall_damage.gd" id="1_u024w"]
+
+[node name="FallDamage" type="Node"]
+script = ExtResource("1_u024w")

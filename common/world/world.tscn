@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://7t21cashyyoy"]
+[gd_scene load_steps=20 format=3 uid="uid://bauyx2od3av72"]
 
 [ext_resource type="PackedScene" uid="uid://71emmhb7enbq" path="res://common/player/player.tscn" id="1_05pjd"]
 [ext_resource type="Environment" uid="uid://balpc0jgt0tas" path="res://common/world/environment.tres" id="1_f2jlc"]
@@ -9,10 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://kopcbpjf5sbn" path="res://addons/quaternius simple nature pack/static bodies/rock_3.tscn" id="6_sj00m"]
 [ext_resource type="PackedScene" uid="uid://t54m5opl3nv2" path="res://addons/quaternius simple nature pack/static bodies/tree_1.tscn" id="7_23v03"]
 [ext_resource type="PackedScene" uid="uid://b6g8yc62f2j5s" path="res://addons/quaternius simple nature pack/static bodies/grass_3.tscn" id="8_n2l4h"]
+[ext_resource type="PackedScene" uid="uid://c8ctnt6jyl4ym" path="res://addons/ez-sfx-and-music/scenes/SfxPlayer/sfx_player.tscn" id="10_6mgbq"]
+[ext_resource type="PackedScene" uid="uid://broifkoebt44g" path="res://common/player/fall damage/fall_damage.tscn" id="10_6ovno"]
 [ext_resource type="Script" path="res://contributors/lopano/debug tools/db_give_damage.gd" id="10_a58tm"]
 [ext_resource type="PackedScene" uid="uid://dqvf64ljd5k52" path="res://common/player/status system/status_system.tscn" id="10_b45hf"]
 [ext_resource type="PackedScene" uid="uid://cefl80okxr4ve" path="res://common/player/death manager/death_manager.tscn" id="10_fwfyv"]
-[ext_resource type="PackedScene" uid="uid://wprltwcut62v" path="res://contributors/lopano/player/fall_damage.tscn" id="10_qpipt"]
 [ext_resource type="PackedScene" uid="uid://tn0yghtihryu" path="res://common/player/status bars/health_bar.tscn" id="11_hq075"]
 [ext_resource type="Script" path="res://contributors/lopano/debug tools/hud.gd" id="11_qrwmf"]
 [ext_resource type="Material" uid="uid://8ylcw0h1lkhg" path="res://addons/kenney_prototype_tools/materials/orange/material_01.tres" id="12_mayhp"]
@@ -60,12 +61,14 @@ transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 
 [node name="Player" parent="." instance=ExtResource("1_05pjd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.268, 2.04584, 9.5)
 
-[node name="FallDamage" parent="Player" node_paths=PackedStringArray("player", "status_system") instance=ExtResource("10_qpipt")]
+[node name="FallDamage" parent="Player" node_paths=PackedStringArray("player", "status_system", "sfx_player") instance=ExtResource("10_6ovno")]
 player = NodePath("..")
 status_system = NodePath("../StatusSystem")
-damage_velocity = 20
-proportional_damage = true
-proportional_damage_ratio = 4.0
+do_sfx = true
+sfx_player = NodePath("SfxPlayer")
+do_hard_hit_sfx = true
+
+[node name="SfxPlayer" parent="Player/FallDamage" instance=ExtResource("10_6mgbq")]
 
 [node name="DeathManager" parent="Player" node_paths=PackedStringArray("status_system") instance=ExtResource("10_fwfyv")]
 status_system = NodePath("../StatusSystem")

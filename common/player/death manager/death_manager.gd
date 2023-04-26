@@ -7,6 +7,7 @@ extends Node
 )
 @onready var player = $".."
 @onready var _player_start_pos = player.get("global_position")
+@onready var _player_start_rot = player.get("global_rotation")
 
 func _ready():
 	assert(
@@ -30,3 +31,4 @@ func _on_status_system_status_at_min(status_name : String):
 				status_system.get_status_default(status_name)
 		)
 		player.set("global_position", _player_start_pos)
+		player.set("global_rotation", _player_start_rot)
