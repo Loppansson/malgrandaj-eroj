@@ -130,3 +130,5 @@ size = Vector3(1, 10, 1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.778692, 0.102482, -0.61898, -1.86265e-09, 0.986569, 0.163343, 0.627406, -0.127194, 0.768234, -15.3728, 6.53811, 30.3482)
+
+[connection signal="status_at_min" from="Player/StatusSystem" to="Player/DBGiveDamage" method="_on_status_system_status_at_min"]

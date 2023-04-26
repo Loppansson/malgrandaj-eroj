@@ -1,28 +1,26 @@
 class_name StatusBar
 extends ProgressBar
 
-#=---------------------------------------------------=#
-#                     Status Bar                      #
-#=---------------------------------------------------=#
-# Dependencies: StatusSystem. Parent or Path.         #
-#=---------------------------------------------------=#
-# Displayes a status from a StatusSystem node. This   #
-# node must be a parent or specified by a path.       #
-#=---------------------------------------------------=#
+## Displayes a status from a StatusSystem node. This
+## node must be a parent or specified by a path.
+##
+## [b]Dependencies:[/b] StatusSystem. Parent or Path.
 
 @export var status_name: String
-@export var status_system: Node
+@export var status_system: StatusSystem
 
 
 func _ready():
 	if not status_system:
 		assert(
-			get_parent().has_method("get_status_index"),
+			get_parent() is StatusSystem,
 			"Status System is empty and parent is not a StatusSystem"
 		)
+		
+		status_system = get_parent()
 	
 	assert(
-		status_system.has_method("get_status_index"),
+		status_system is StatusSystem,
 		"The provided node is not a StatusSystem"
 	)
 	
