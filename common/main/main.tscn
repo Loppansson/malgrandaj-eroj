@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://qil8fir5khaa" path="res://addons/quit on input/quit_on_input.tscn" id="3_k07nq"]
 [ext_resource type="Script" path="res://contributors/lopano/menu concept/scene_manager.gd" id="6_fg48f"]
 [ext_resource type="PackedScene" uid="uid://ok5n0amv4kpu" path="res://common/ui/menus/main_menu.tscn" id="7_5k0wh"]
-[ext_resource type="PackedScene" uid="uid://ch8vm2d5xwxt0" path="res://common/world/world.tscn" id="8_0k58n"]
+[ext_resource type="PackedScene" uid="uid://7t21cashyyoy" path="res://common/world/world.tscn" id="8_0k58n"]
 [ext_resource type="PackedScene" uid="uid://bve36bjurmspl" path="res://common/ui/menus/loading_screen.tscn" id="8_kjeo6"]
 
 [node name="Main" type="Node"]

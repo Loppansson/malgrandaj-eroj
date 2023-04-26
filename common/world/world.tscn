@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=19 format=3 uid="uid://7t21cashyyoy"]
 
 [ext_resource type="PackedScene" uid="uid://71emmhb7enbq" path="res://common/player/player.tscn" id="1_05pjd"]
 [ext_resource type="Environment" uid="uid://balpc0jgt0tas" path="res://common/world/environment.tres" id="1_f2jlc"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://contributors/lopano/debug tools/db_give_damage.gd" id="10_a58tm"]
 [ext_resource type="PackedScene" uid="uid://dqvf64ljd5k52" path="res://common/player/status system/status_system.tscn" id="10_b45hf"]
 [ext_resource type="PackedScene" uid="uid://cefl80okxr4ve" path="res://common/player/death manager/death_manager.tscn" id="10_fwfyv"]
+[ext_resource type="PackedScene" uid="uid://wprltwcut62v" path="res://contributors/lopano/player/fall_damage.tscn" id="10_qpipt"]
 [ext_resource type="PackedScene" uid="uid://tn0yghtihryu" path="res://common/player/status bars/health_bar.tscn" id="11_hq075"]
 [ext_resource type="Script" path="res://contributors/lopano/debug tools/hud.gd" id="11_qrwmf"]
 [ext_resource type="Material" uid="uid://8ylcw0h1lkhg" path="res://addons/kenney_prototype_tools/materials/orange/material_01.tres" id="12_mayhp"]
@@ -57,7 +58,14 @@ collision_mask = 0
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 8.72272, 4.76837e-07, 4.78301)
 
 [node name="Player" parent="." instance=ExtResource("1_05pjd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.268, 7.463, 9.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.268, 2.04584, 9.5)
+
+[node name="FallDamage" parent="Player" node_paths=PackedStringArray("player", "status_system") instance=ExtResource("10_qpipt")]
+player = NodePath("..")
+status_system = NodePath("../StatusSystem")
+damage_velocity = 20
+proportional_damage = true
+proportional_damage_ratio = 4.0
 
 [node name="DeathManager" parent="Player" node_paths=PackedStringArray("status_system") instance=ExtResource("10_fwfyv")]
 status_system = NodePath("../StatusSystem")
