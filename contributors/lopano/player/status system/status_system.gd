@@ -1,23 +1,25 @@
 extends Node
 
-#=----------------------------------------------------=#
-#                     Status System                    #
-#=----------------------------------------------------=#
-# Stores variables useful when giving stuff status     #
-# elements, like health,  hunger, and thirst.          #
-#                                                      #
-# All arrays must be the same size.                    #
-#=----------------------------------------------------=#
-#         statuses : The statuses that are in use by   #
-#                    name.                             #
-#       status_min : The min value the status can be.  #
-#       status_max : The max value the status can be.  #
-#   status_default : Status_current is set to          #
-#                    status_default at ready().        #
-#   status_current : The current state of the status.  #
-# get_status(name) : Gets status_current associated    #
-#                    with the name given.              #
-#=----------------------------------------------------=#
+#=----------------------------------------------------------=#
+#                        Status System                       #
+#=----------------------------------------------------------=#
+# Stores variables useful when giving stuff status elements, #
+# like health,  hunger, and thirst.                          #
+#                                                            #
+# All arrays must be the same size.                          #
+#=----------------------------------------------------------=#
+#               statuses : The statuses that are in use by   #
+#                          name.                             #
+#             status_min : The min value the status can be.  #
+#             status_max : The max value the status can be.  #
+#         status_default : Status_current is set to          #
+#                          status_default at ready().        #
+#         status_current : The current state of the status.  #
+# get_status_index(name) : Gets the index a status by name   #
+#                          has in statuses.                  #
+# get_status_value(name) : Gets status_current associated    #
+#                          with the name given.              #
+#=----------------------------------------------------------=#
 
 @export var statuses: Array[String]
 @export var status_min: Array[int]
@@ -45,7 +47,7 @@ func _ready():
 		status_current[i] = status_default[i]
 
 
-func get_status(name: String) -> int:
+func get_status_index(name: String) -> int:
 	var _found_status_index: int
 	
 	for i in range(_number_statuses):
@@ -62,3 +64,7 @@ func get_status(name: String) -> int:
 	)
 	
 	return _found_status_index
+
+
+func get_status_value(name: String) -> int:
+	return status_current[get_status_index(name)]

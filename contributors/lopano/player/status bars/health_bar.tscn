@@ -1,5 +1,9 @@
-[gd_scene format=3 uid="uid://c1681da8s8iee"]
+[gd_scene load_steps=2 format=3 uid="uid://c1681da8s8iee"]
+
+[ext_resource type="Script" path="res://contributors/lopano/player/status bars/status_bar.gd" id="1_itmqt"]
 
 [node name="HealthBar" type="ProgressBar"]
 offset_right = 279.0
 offset_bottom = 27.0
+script = ExtResource("1_itmqt")
+status_name = "health"
