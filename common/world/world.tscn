@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ch8vm2d5xwxt0"]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="PackedScene" uid="uid://71emmhb7enbq" path="res://common/player/player.tscn" id="1_05pjd"]
 [ext_resource type="Environment" uid="uid://balpc0jgt0tas" path="res://common/world/environment.tres" id="1_f2jlc"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b6g8yc62f2j5s" path="res://addons/quaternius simple nature pack/static bodies/grass_3.tscn" id="8_n2l4h"]
 [ext_resource type="Script" path="res://contributors/lopano/debug tools/db_give_damage.gd" id="10_a58tm"]
 [ext_resource type="PackedScene" uid="uid://dqvf64ljd5k52" path="res://common/player/status system/status_system.tscn" id="10_b45hf"]
+[ext_resource type="PackedScene" uid="uid://cefl80okxr4ve" path="res://common/player/death manager/death_manager.tscn" id="10_fwfyv"]
 [ext_resource type="PackedScene" uid="uid://tn0yghtihryu" path="res://common/player/status bars/health_bar.tscn" id="11_hq075"]
 [ext_resource type="Script" path="res://contributors/lopano/debug tools/hud.gd" id="11_qrwmf"]
 [ext_resource type="Material" uid="uid://8ylcw0h1lkhg" path="res://addons/kenney_prototype_tools/materials/orange/material_01.tres" id="12_mayhp"]
@@ -57,6 +58,9 @@ transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 
 
 [node name="Player" parent="." instance=ExtResource("1_05pjd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.268, 7.463, 9.5)
+
+[node name="DeathManager" parent="Player" node_paths=PackedStringArray("status_system") instance=ExtResource("10_fwfyv")]
+status_system = NodePath("../StatusSystem")
 
 [node name="DBGiveDamage" type="Node" parent="Player"]
 script = ExtResource("10_a58tm")
@@ -130,5 +134,3 @@ size = Vector3(1, 10, 1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.778692, 0.102482, -0.61898, -1.86265e-09, 0.986569, 0.163343, 0.627406, -0.127194, 0.768234, -15.3728, 6.53811, 30.3482)
-
-[connection signal="status_at_min" from="Player/StatusSystem" to="Player/DBGiveDamage" method="_on_status_system_status_at_min"]
