@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cq8dh7kinymur"]
+[gd_scene load_steps=17 format=3 uid="uid://c0abfty1iy2hr"]
 
 [ext_resource type="PackedScene" uid="uid://71emmhb7enbq" path="res://common/player/player.tscn" id="1_05pjd"]
 [ext_resource type="Environment" uid="uid://balpc0jgt0tas" path="res://common/world/environment.tres" id="1_f2jlc"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://kopcbpjf5sbn" path="res://addons/quaternius simple nature pack/static bodies/rock_3.tscn" id="6_sj00m"]
 [ext_resource type="PackedScene" uid="uid://t54m5opl3nv2" path="res://addons/quaternius simple nature pack/static bodies/tree_1.tscn" id="7_23v03"]
 [ext_resource type="PackedScene" uid="uid://b6g8yc62f2j5s" path="res://addons/quaternius simple nature pack/static bodies/grass_3.tscn" id="8_n2l4h"]
+[ext_resource type="Script" path="res://contributors/lopano/debug tools/db_give_damage.gd" id="10_a58tm"]
+[ext_resource type="PackedScene" uid="uid://c7t7awe5inmxb" path="res://contributors/lopano/player/status system/status_system.tscn" id="10_b45hf"]
+[ext_resource type="PackedScene" uid="uid://c1681da8s8iee" path="res://contributors/lopano/player/status bars/health_bar.tscn" id="11_hq075"]
 [ext_resource type="Script" path="res://contributors/lopano/debug tools/hud.gd" id="11_qrwmf"]
 [ext_resource type="Material" uid="uid://8ylcw0h1lkhg" path="res://addons/kenney_prototype_tools/materials/orange/material_01.tres" id="12_mayhp"]
 [ext_resource type="Material" uid="uid://ddal25jay8fq1" path="res://addons/kenney_prototype_tools/materials/purple/material_01.tres" id="13_0erfh"]
@@ -25,7 +28,7 @@ shadow_enabled = true
 
 [node name="LopanaGenerator" parent="." node_paths=PackedStringArray("origin") instance=ExtResource("2_oq4vc")]
 generation_distance = 3
-intitial_generation_distance = Vector3(12, 3, 12)
+intitial_generation_distance = Vector3(3, 3, 3)
 intitial_generation_offset = Vector3(0, -1, 0)
 origin = NodePath("../Player")
 
@@ -55,17 +58,44 @@ transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 
 [node name="Player" parent="." instance=ExtResource("1_05pjd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.268, 7.463, 9.5)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Player"]
+[node name="DBGiveDamage" type="Node" parent="Player"]
+script = ExtResource("10_a58tm")
+
+[node name="StatusSystem" parent="Player" instance=ExtResource("10_b45hf")]
+statuses = Array[String](["health"])
+status_min = Array[int]([0])
+status_max = Array[int]([8])
+status_default = Array[int]([8])
+status_current = Array[int]([0])
+
+[node name="HUDCanvasLayer" type="CanvasLayer" parent="Player"]
+
+[node name="HealthBar" parent="Player/HUDCanvasLayer" node_paths=PackedStringArray("status_system") instance=ExtResource("11_hq075")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -139.5
+offset_top = -56.0
+offset_right = 139.5
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+step = 1.0
+status_system = NodePath("../../StatusSystem")
+
+[node name="DBCanvasLayer" type="CanvasLayer" parent="Player"]
 visible = false
 script = ExtResource("11_qrwmf")
 
-[node name="PlayerPos" type="Label" parent="Player/CanvasLayer"]
+[node name="PlayerPos" type="Label" parent="Player/DBCanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 32
 text = "Pos:"
 
-[node name="PlayerChunkPos" type="Label" parent="Player/CanvasLayer"]
+[node name="PlayerChunkPos" type="Label" parent="Player/DBCanvasLayer"]
 offset_top = 48.0
 offset_right = 65.0
 offset_bottom = 96.0

@@ -26,5 +26,16 @@ func _ready():
 		"The provided node is not a StatusSystem"
 	)
 	
-	status_system.get_status_value(status_name)
-	
+	min_value = status_system.get_status_min(status_name)
+	max_value = status_system.get_status_max(status_name)
+
+
+func _process(delta):
+	value = status_system.get_status_current(status_name)
+
+
+
+
+
+
+
