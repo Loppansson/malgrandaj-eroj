@@ -64,11 +64,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.268, 2.04584, 9.5)
 [node name="FallDamage" parent="Player" node_paths=PackedStringArray("player", "status_system", "sfx_player") instance=ExtResource("10_6ovno")]
 player = NodePath("..")
 status_system = NodePath("../StatusSystem")
+damage_velocity = 25
 do_sfx = true
 sfx_player = NodePath("SfxPlayer")
+hit_sfx_name = "footstep_grass_000"
 do_hard_hit_sfx = true
+hard_hit_level = 45
+hard_hit_sfx_name = "footstep_grass_001"
 
 [node name="SfxPlayer" parent="Player/FallDamage" instance=ExtResource("10_6mgbq")]
+sfx_folder = "res://addons/kenney impact sounds"
 
 [node name="DeathManager" parent="Player" node_paths=PackedStringArray("status_system") instance=ExtResource("10_fwfyv")]
 status_system = NodePath("../StatusSystem")
