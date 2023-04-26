@@ -1,6 +1,6 @@
 extends Node
 
-@onready var status_system = $"../StatusSystem"
+@onready var status_system = $"../StatusSystem" as StatusSystem
 
 
 func _process(delta):

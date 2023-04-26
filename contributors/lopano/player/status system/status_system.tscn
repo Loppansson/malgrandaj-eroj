@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7t7awe5inmxb"]
-
-[ext_resource type="Script" path="res://contributors/lopano/player/status system/status_system.gd" id="1_ex7tl"]
-
-[node name="StatusSystem" type="Node"]
-script = ExtResource("1_ex7tl")

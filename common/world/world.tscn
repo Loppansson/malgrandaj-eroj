@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c0abfty1iy2hr"]
+[gd_scene load_steps=17 format=3 uid="uid://ch8vm2d5xwxt0"]
 
 [ext_resource type="PackedScene" uid="uid://71emmhb7enbq" path="res://common/player/player.tscn" id="1_05pjd"]
 [ext_resource type="Environment" uid="uid://balpc0jgt0tas" path="res://common/world/environment.tres" id="1_f2jlc"]
@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://t54m5opl3nv2" path="res://addons/quaternius simple nature pack/static bodies/tree_1.tscn" id="7_23v03"]
 [ext_resource type="PackedScene" uid="uid://b6g8yc62f2j5s" path="res://addons/quaternius simple nature pack/static bodies/grass_3.tscn" id="8_n2l4h"]
 [ext_resource type="Script" path="res://contributors/lopano/debug tools/db_give_damage.gd" id="10_a58tm"]
-[ext_resource type="PackedScene" uid="uid://c7t7awe5inmxb" path="res://contributors/lopano/player/status system/status_system.tscn" id="10_b45hf"]
-[ext_resource type="PackedScene" uid="uid://c1681da8s8iee" path="res://contributors/lopano/player/status bars/health_bar.tscn" id="11_hq075"]
+[ext_resource type="PackedScene" uid="uid://qgqs60n5orkk" path="res://common/player/status system/status_system.tscn" id="10_b45hf"]
+[ext_resource type="PackedScene" uid="uid://bpk41go3n06cy" path="res://common/player/status bars/health_bar.tscn" id="11_hq075"]
 [ext_resource type="Script" path="res://contributors/lopano/debug tools/hud.gd" id="11_qrwmf"]
 [ext_resource type="Material" uid="uid://8ylcw0h1lkhg" path="res://addons/kenney_prototype_tools/materials/orange/material_01.tres" id="12_mayhp"]
 [ext_resource type="Material" uid="uid://ddal25jay8fq1" path="res://addons/kenney_prototype_tools/materials/purple/material_01.tres" id="13_0erfh"]

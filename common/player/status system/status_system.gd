@@ -98,6 +98,13 @@ func set_status_default(name: String, value: int) -> void:
 
 func set_status_current(name: String, value: int) -> void:
 	status_current[get_status_index(name)] = value
+	
+	if get_status_current(name) < get_status_min(name):
+		set_status_current(name, get_status_min(name))
+	
+	elif get_status_current(name) > get_status_max(name):
+		set_status_current(name, get_status_max(name))
+	
 	emit_signal("status_updated", name)
 
 
@@ -114,7 +121,14 @@ func add_status_default(name: String, value: int) -> void:
 
 
 func add_status_current(name: String, value: int) -> void:
-	status_current[get_status_index(name)] += value
+	status_current[get_status_index(name)] += value 
+	
+	if get_status_current(name) < get_status_min(name):
+		set_status_current(name, get_status_min(name))
+	
+	elif get_status_current(name) > get_status_max(name):
+		set_status_current(name, get_status_max(name))
+	
 	emit_signal("status_updated", name)
 
 

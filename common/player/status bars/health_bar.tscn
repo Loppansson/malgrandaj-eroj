@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://tn0yghtihryu"]
+
+[ext_resource type="Theme" uid="uid://wjexudynljdk" path="res://common/ui/themes/health_bar.tres" id="1_1kojl"]
+[ext_resource type="Script" path="res://common/player/status bars/status_bar.gd" id="2_2s4dn"]
+
+[node name="HealthBar" type="ProgressBar"]
+offset_right = 279.0
+offset_bottom = 27.0
+theme = ExtResource("1_1kojl")
+value = 50.0
+show_percentage = false
+script = ExtResource("2_2s4dn")
+status_name = "health"
